@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.28010.2003
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JiraSearcher", "JiraSearcher\JiraSearcher.csproj", "{04D29533-2FE2-4333-AC4E-2E4F417E6636}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoTestCase", "AutoTestCase\AutoTestCase.csproj", "{26FE5AFB-5D48-44A3-B4C6-C4A97230B50C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{04D29533-2FE2-4333-AC4E-2E4F417E6636}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{04D29533-2FE2-4333-AC4E-2E4F417E6636}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{04D29533-2FE2-4333-AC4E-2E4F417E6636}.Release|Any CPU.Build.0 = Release|Any CPU
+		{26FE5AFB-5D48-44A3-B4C6-C4A97230B50C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{26FE5AFB-5D48-44A3-B4C6-C4A97230B50C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{26FE5AFB-5D48-44A3-B4C6-C4A97230B50C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{26FE5AFB-5D48-44A3-B4C6-C4A97230B50C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
