@@ -5,6 +5,7 @@ using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Configuration;
 using System.Linq;
 using System.Net;
 using System.Text;
@@ -17,7 +18,7 @@ namespace AutoTestCase.ViewModel
     {
         private string testCaseId = "excalibur-3213";
         private WebClient Client { get; set; } = new WebClient();
-        private readonly string ServiceAddress = "http://192.168.1.3/match_testcase/";
+        private readonly string ServiceAddress = ConfigurationManager.AppSettings["ServiceAddress"];
 
         public string TestCaseId
         {
