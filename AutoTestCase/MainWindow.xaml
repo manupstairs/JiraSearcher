@@ -24,7 +24,30 @@
         <Button Grid.Row="0" Grid.Column="2" Command="{Binding SearchCommand,Mode=OneWay}">Search</Button>
         
         <TextBlock Grid.Row="1" Grid.Column="0">Results:</TextBlock>
-        <ListView Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" ItemsSource="{Binding TestCases}">
+        <ListView Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" ItemsSource="{Binding TestCases}" AlternationCount="2">
+            <ListView.Style>
+                <Style TargetType="ListView">
+                    <Style.Triggers>
+                        <Trigger Property="HasItems"
+                         Value="False">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="ListView">
+                                        <TextBlock Text="No items..." HorizontalAlignment="Center"/>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                            
+                        </Trigger>
+                        <Trigger Property="ItemsControl.AlternationIndex"  Value="0">
+                            <Setter Property="Background" Value="LightBlue" />
+                        </Trigger>
+                        <Trigger Property="ItemsControl.AlternationIndex"  Value="1">
+                            <Setter Property="Background" Value="LightGray" />
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </ListView.Style>
             <ListView.View>
                 <GridView AllowsColumnReorder="true">
                     <GridViewColumn DisplayMemberBinding=
