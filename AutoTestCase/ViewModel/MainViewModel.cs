@@ -1,5 +1,7 @@
-﻿using GalaSoft.MvvmLight;
+﻿using CommonServiceLocator;
+using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.Views;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
@@ -14,7 +16,7 @@ using System.Windows.Input;
 
 namespace AutoTestCase.ViewModel
 {
-    public class MainViewModel : ViewModelBase
+    public class MainViewModel : ViewModelBase,IShowWindow
     {
         private string testCaseId = "excalibur-3213";
         private WebClient Client { get; set; } = new WebClient();
@@ -40,9 +42,24 @@ namespace AutoTestCase.ViewModel
             }
         }
 
+        private TestCase selectedTestCase;
+
+        public event EventHandler<TestCase> ShowWindowEvent;
+
+        public TestCase SelectedTestCase
+        {
+            get { return selectedTestCase; }
+            set
+            {
+                Set(ref selectedTestCase , value);
+                ShowWindowEvent?.Invoke(this, value);
+            }
+        }
+
+
         public ObservableCollection<TestCase> TestCases { get; set; } = new ObservableCollection<TestCase>();
 
-
+   
         public ICommand SearchCommand { get; set; }
 
         public MainViewModel()
@@ -74,6 +91,5 @@ namespace AutoTestCase.ViewModel
                 Client.DownloadStringAsync(new Uri(ServiceAddress + TestCaseId));
             }
         }
-
     }
 }

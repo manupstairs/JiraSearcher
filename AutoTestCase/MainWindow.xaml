@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:AutoTestCase"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800"
-        DataContext="{Binding Source={StaticResource Locator}, Path=Main}">
+        >
     <Grid >
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"></RowDefinition>
@@ -24,7 +24,8 @@
         <Button Grid.Row="0" Grid.Column="2" Command="{Binding SearchCommand,Mode=OneWay}">Search</Button>
         
         <TextBlock Grid.Row="1" Grid.Column="0">Results:</TextBlock>
-        <ListView Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" ItemsSource="{Binding TestCases}" AlternationCount="2">
+        <ListView Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" SelectedItem="{Binding SelectedTestCase,Mode=TwoWay}"
+                  ItemsSource="{Binding TestCases}" AlternationCount="2">
             <ListView.ItemContainerStyle>
                 <Style TargetType="ListViewItem">
                     <Setter Property="Height" Value="100"></Setter>
