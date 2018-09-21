@@ -8,7 +8,7 @@
         Title="DetailPage" Height="450" Width="800">
     <StackPanel>
         <TextBlock Text="{Binding Id}"></TextBlock>
-        <TextBlock Text="{Binding Weigth}"></TextBlock>
+        <TextBlock Text="{Binding Weight}"></TextBlock>
         <TextBlock Text="{Binding Description}"></TextBlock>
         <TextBlock Text="{Binding Steps}"></TextBlock>
     </StackPanel>
