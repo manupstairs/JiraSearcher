@@ -13,5 +13,9 @@ namespace AutoTestCase
         public double Possibility { get; set; }
 
         public string Description { get; set; }
+
+        public double Weight { get; set; }
+
+        public string Steps { get; set; }
     }
 }

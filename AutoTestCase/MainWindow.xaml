@@ -25,6 +25,19 @@
         
         <TextBlock Grid.Row="1" Grid.Column="0">Results:</TextBlock>
         <ListView Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" ItemsSource="{Binding TestCases}" AlternationCount="2">
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="Height" Value="100"></Setter>
+                    <Style.Triggers>
+                        <Trigger Property="ItemsControl.AlternationIndex"  Value="0">
+                            <Setter Property="Background" Value="White" />
+                        </Trigger>
+                        <Trigger Property="ItemsControl.AlternationIndex"  Value="1">
+                            <Setter Property="Background" Value="LightBlue" />
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </ListView.ItemContainerStyle>
             <ListView.Style>
                 <Style TargetType="ListView">
                     <Style.Triggers>
@@ -37,13 +50,6 @@
                                     </ControlTemplate>
                                 </Setter.Value>
                             </Setter>
-                            
-                        </Trigger>
-                        <Trigger Property="ItemsControl.AlternationIndex"  Value="0">
-                            <Setter Property="Background" Value="LightBlue" />
-                        </Trigger>
-                        <Trigger Property="ItemsControl.AlternationIndex"  Value="1">
-                            <Setter Property="Background" Value="LightGray" />
                         </Trigger>
                     </Style.Triggers>
                 </Style>
@@ -54,10 +60,21 @@
                           "{Binding Path=Id}" 
                       Header="Id" />
                     <GridViewColumn DisplayMemberBinding=
-                          "{Binding Possibility}" Header="Possibility" />
-                    <GridViewColumn DisplayMemberBinding=
-                          "{Binding Description}" 
-                      Header="Description" />
+                          "{Binding Possibility}" Header="Weight" />
+                    <GridViewColumn Header="Description" Width="400">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Description}"  TextTrimming="WordEllipsis"></TextBlock>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Steps" Width="400">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Steps}"  TextTrimming="WordEllipsis"></TextBlock>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
                 </GridView>
             </ListView.View>
         </ListView>
