@@ -53,6 +53,7 @@ namespace AutoTestCase.ViewModel
             {
                 Set(ref selectedTestCase , value);
                 ShowWindowEvent?.Invoke(this, value);
+                selectedTestCase = null;
             }
         }
 

@@ -61,7 +61,7 @@
                           "{Binding Path=Id}" 
                       Header="Id" />
                     <GridViewColumn DisplayMemberBinding=
-                          "{Binding Possibility}" Header="Weight" />
+                          "{Binding Weight}" Header="Weight" />
                     <GridViewColumn Header="Description" Width="400">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
