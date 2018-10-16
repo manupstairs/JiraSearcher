@@ -30,6 +30,10 @@ namespace AutoTestCase
                   var page = new DetailPage(e);
                   page.ShowDialog();
               };
+            vm.ShowMessageEvent += (sender,e)=>
+            {
+                MessageBox.Show(e);
+            };
             this.DataContext = vm;
         }
     }

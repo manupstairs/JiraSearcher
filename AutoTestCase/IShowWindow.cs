@@ -10,4 +10,9 @@ namespace AutoTestCase
     {
         event EventHandler<TestCase> ShowWindowEvent;
     }
+
+    interface IShowMessage
+    {
+        event EventHandler<string> ShowMessageEvent;
+    }
 }

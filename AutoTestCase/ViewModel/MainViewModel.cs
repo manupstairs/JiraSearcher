@@ -16,7 +16,7 @@ using System.Windows.Input;
 
 namespace AutoTestCase.ViewModel
 {
-    public class MainViewModel : ViewModelBase,IShowWindow
+    public class MainViewModel : ViewModelBase,IShowWindow,IShowMessage
     {
         private string testCaseId = "excalibur-3213";
         private WebClient Client { get; set; } = new WebClient();
@@ -45,6 +45,7 @@ namespace AutoTestCase.ViewModel
         private TestCase selectedTestCase;
 
         public event EventHandler<TestCase> ShowWindowEvent;
+        public event EventHandler<string> ShowMessageEvent;
 
         public TestCase SelectedTestCase
         {
@@ -86,6 +87,8 @@ namespace AutoTestCase.ViewModel
             }
             catch (Exception)
             {
+                this.ShowMessageEvent?.Invoke(this,"AI engine is not working now! Please try again later.");
+                return;
             }
             var jArray = JsonConvert.DeserializeObject(Result) as JArray;
                 if (jArray != null && jArray.Count > 0)
