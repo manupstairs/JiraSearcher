@@ -21,7 +21,7 @@
 
         <TextBlock Grid.Row="0" Grid.Column="0">Test Case ID:</TextBlock>
         <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding TestCaseId,Mode=TwoWay}"></TextBox>
-        <Button Grid.Row="0" Grid.Column="2" Command="{Binding SearchCommand,Mode=OneWay}">Search</Button>
+        <Button Grid.Row="0" Grid.Column="2" Command="{Binding SearchCommand,Mode=OneWay}">Generate</Button>
         
         <TextBlock Grid.Row="1" Grid.Column="0">Results:</TextBlock>
         <ListView Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" SelectedItem="{Binding SelectedTestCase,Mode=TwoWay}"
@@ -79,5 +79,7 @@
                 </GridView>
             </ListView.View>
         </ListView>
+        <ProgressBar Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" 
+                     Width="400" Height="40" IsIndeterminate="True" Visibility="{Binding IsSearching,Converter={StaticResource boolToVisibilityConverter}}" />
     </Grid>
 </Window>

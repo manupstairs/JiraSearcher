@@ -57,6 +57,13 @@ namespace AutoTestCase.ViewModel
             }
         }
 
+        private bool isSearching;
+
+        public bool IsSearching
+        {
+            get { return isSearching; }
+            set { Set(ref isSearching, value); }
+        }
 
         public ObservableCollection<TestCase> TestCases { get; set; } = new ObservableCollection<TestCase>();
 
@@ -71,22 +78,30 @@ namespace AutoTestCase.ViewModel
 
         private void Client_DownloadStringCompleted(object sender, DownloadStringCompletedEventArgs e)
         {
+            IsSearching = false;
             TestCases.Clear();
-            Result = e.Result;
-            var jArray = JsonConvert.DeserializeObject(Result) as JArray;
-            if (jArray != null && jArray.Count > 0)
+            try
             {
-                var list = jArray.ToObject<IList<TestCase>>();
-                foreach (var item in list)
-                {
-                    TestCases.Add(item);
-                }
+                Result = e.Result;
             }
+            catch (Exception)
+            {
+            }
+            var jArray = JsonConvert.DeserializeObject(Result) as JArray;
+                if (jArray != null && jArray.Count > 0)
+                {
+                    var list = jArray.ToObject<IList<TestCase>>();
+                    foreach (var item in list)
+                    {
+                        TestCases.Add(item);
+                    }
+                }
+            
         }
 
         private void Search()
         {
-
+            IsSearching = true;
             if (!Client.IsBusy)
             { 
                 Client.DownloadStringAsync(new Uri(ServiceAddress + TestCaseId));
