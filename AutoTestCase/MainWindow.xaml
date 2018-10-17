@@ -29,7 +29,7 @@
                   ItemsSource="{Binding TestCases}" AlternationCount="2">
             <ListView.ItemContainerStyle>
                 <Style TargetType="ListViewItem">
-                    <Setter Property="Height" Value="100"></Setter>
+                    <Setter Property="Height" Value="150"></Setter>
                     <Style.Triggers>
                         <Trigger Property="ItemsControl.AlternationIndex"  Value="0">
                             <Setter Property="Background" Value="White" />
@@ -61,19 +61,19 @@
                     <GridViewColumn DisplayMemberBinding=
                           "{Binding Path=Id}" 
                       Header="Id" />
-                    <GridViewColumn Header="DesTitlecription" Width="400">
+                    <GridViewColumn Header="DesTitlecription" Width="200">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock Text="{Binding Title}"  TextTrimming="WordEllipsis"></TextBlock>
+                                <TextBlock Text="{Binding Title}" TextWrapping="Wrap" TextTrimming="WordEllipsis"></TextBlock>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
                     <GridViewColumn DisplayMemberBinding=
                           "{Binding Priority}" Header="Priority" />
-                    <GridViewColumn Header="Description" Width="400">
+                    <GridViewColumn Header="Description" Width="800">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock Text="{Binding Description}"  TextTrimming="WordEllipsis"></TextBlock>
+                                <TextBlock Text="{Binding Description}" TextWrapping="Wrap" TextTrimming="WordEllipsis"></TextBlock>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>

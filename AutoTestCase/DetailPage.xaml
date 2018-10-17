@@ -6,10 +6,47 @@
         xmlns:local="clr-namespace:AutoTestCase"
         mc:Ignorable="d"
         Title="DetailPage" Height="450" Width="800">
-    <StackPanel>
+    <!--<StackPanel Margin="8">
         <TextBlock Text="{Binding Id}"></TextBlock>
         <TextBlock Text="{Binding Weight}"></TextBlock>
         <TextBlock Text="{Binding Description}"></TextBlock>
         <TextBlock Text="{Binding Steps}"></TextBlock>
-    </StackPanel>
+    </StackPanel>-->
+    <ListView Margin="9" ItemsSource="{Binding Steps}" AlternationCount="2">
+        <ListView.ItemContainerStyle>
+            <Style TargetType="ListViewItem">
+                <Style.Triggers>
+                    <Trigger Property="ItemsControl.AlternationIndex"  Value="0">
+                        <Setter Property="Background" Value="White" />
+                    </Trigger>
+                    <Trigger Property="ItemsControl.AlternationIndex"  Value="1">
+                        <Setter Property="Background" Value="LightGray" />
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+        </ListView.ItemContainerStyle>
+        <ListView.ItemTemplate>
+            <DataTemplate>
+                <Grid Margin="4">
+                    <Grid.RowDefinitions>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition Width="8"></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="{Binding Key}" ></TextBlock>
+                    <TextBlock Text="ID:" Grid.Row="1"></TextBlock>
+                    <TextBlock Text="Description:" Grid.Row="2"></TextBlock>
+                    
+                   
+                    <TextBlock Grid.Row="1" Grid.Column="2" Text="{Binding Value.Id}" ></TextBlock>
+                    <TextBlock Grid.Row="2" Grid.Column="2" Text="{Binding Value.Description}" ></TextBlock>
+                </Grid>
+            </DataTemplate>
+        </ListView.ItemTemplate>
+    </ListView>
 </Window>
