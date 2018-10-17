@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AutoTestCase"
-        mc:Ignorable="d"
+        mc:Ignorable="d" WindowState="Maximized"
         Title="MainWindow" Height="450" Width="800"
         >
     <Grid >
@@ -19,12 +19,13 @@
             <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
 
-        <TextBlock Grid.Row="0" Grid.Column="0">Test Case ID:</TextBlock>
-        <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding TestCaseId,Mode=TwoWay}"></TextBox>
-        <Button Grid.Row="0" Grid.Column="2" Command="{Binding SearchCommand,Mode=OneWay}">Generate</Button>
-        
-        <TextBlock Grid.Row="1" Grid.Column="0">Results:</TextBlock>
-        <ListView Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" SelectedItem="{Binding SelectedTestCase,Mode=TwoWay}"
+        <TextBlock Grid.Row="0" Grid.Column="0" Margin="8">Test Case ID:</TextBlock>
+        <TextBox Grid.Row="0" Grid.Column="1" Margin="8" Text="{Binding TestCaseId,Mode=TwoWay}"></TextBox>
+        <Button Grid.Row="0" Grid.Column="2" Width="100" Margin="8" HorizontalAlignment="Left"
+                Command="{Binding SearchCommand,Mode=OneWay}">Generate</Button>
+
+        <TextBlock Grid.Row="1" Grid.Column="0" Margin="8">Results:</TextBlock>
+        <ListView Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Margin="8" SelectedItem="{Binding SelectedTestCase,Mode=TwoWay}"
                   ItemsSource="{Binding TestCases}" AlternationCount="2">
             <ListView.ItemContainerStyle>
                 <Style TargetType="ListViewItem">
@@ -60,8 +61,15 @@
                     <GridViewColumn DisplayMemberBinding=
                           "{Binding Path=Id}" 
                       Header="Id" />
+                    <GridViewColumn Header="DesTitlecription" Width="400">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Title}"  TextTrimming="WordEllipsis"></TextBlock>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
                     <GridViewColumn DisplayMemberBinding=
-                          "{Binding Weight}" Header="Weight" />
+                          "{Binding Priority}" Header="Priority" />
                     <GridViewColumn Header="Description" Width="400">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
@@ -69,10 +77,10 @@
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    <GridViewColumn Header="Steps" Width="400">
+                    <GridViewColumn Header="Steps">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock Text="{Binding Steps}"  TextTrimming="WordEllipsis"></TextBlock>
+                                <TextBlock Text="{Binding Steps.Count}" ></TextBlock>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>

@@ -52,7 +52,7 @@ namespace AutoTestCase.ViewModel
             get { return selectedTestCase; }
             set
             {
-                Set(ref selectedTestCase , value);
+                Set(ref selectedTestCase, value);
                 ShowWindowEvent?.Invoke(this, value);
                 selectedTestCase = null;
             }
@@ -68,7 +68,6 @@ namespace AutoTestCase.ViewModel
 
         public ObservableCollection<TestCase> TestCases { get; set; } = new ObservableCollection<TestCase>();
 
-   
         public ICommand SearchCommand { get; set; }
 
         public MainViewModel()
@@ -90,16 +89,9 @@ namespace AutoTestCase.ViewModel
                 this.ShowMessageEvent?.Invoke(this,"AI engine is not working now! Please try again later.");
                 return;
             }
-            var jArray = JsonConvert.DeserializeObject(Result) as JArray;
-                if (jArray != null && jArray.Count > 0)
-                {
-                    var list = jArray.ToObject<IList<TestCase>>();
-                    foreach (var item in list)
-                    {
-                        TestCases.Add(item);
-                    }
-                }
-            
+
+            var testCase = JsonConvert.DeserializeObject<TestCase>(Result);
+            TestCases.Add(testCase);
         }
 
         private void Search()
