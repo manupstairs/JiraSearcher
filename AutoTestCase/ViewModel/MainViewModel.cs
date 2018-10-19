@@ -16,9 +16,9 @@ using System.Windows.Input;
 
 namespace AutoTestCase.ViewModel
 {
-    public class MainViewModel : ViewModelBase,IShowWindow,IShowMessage
+    public class MainViewModel : ViewModelBase, IShowWindow, IShowMessage
     {
-        
+
         private WebClient Client { get; set; } = new WebClient();
         private readonly string ServiceAddress = ConfigurationManager.AppSettings["ServiceAddress1"];
 
@@ -37,8 +37,17 @@ namespace AutoTestCase.ViewModel
         public string Document
         {
             get { return document; }
-            set { Set(ref document , value); }
+            set { Set(ref document, value); }
         }
+
+        private bool isUserStoryId = true;
+
+        public bool IsUserStoryId
+        {
+            get { return isUserStoryId; }
+            set { Set(ref isUserStoryId, value); }
+        }
+
 
         private string result;
 
@@ -82,7 +91,6 @@ namespace AutoTestCase.ViewModel
         public MainViewModel()
         {
             SearchCommand = new RelayCommand(Search);
-            Client.DownloadStringCompleted += Client_DownloadStringCompleted;
             Client.UploadValuesCompleted += Client_UploadValuesCompleted;
         }
 
@@ -104,33 +112,20 @@ namespace AutoTestCase.ViewModel
             TestCases.Add(testCase);
         }
 
-        private void Client_DownloadStringCompleted(object sender, DownloadStringCompletedEventArgs e)
-        {
-            IsSearching = false;
-            TestCases.Clear();
-            try
-            {
-                Result = e.Result;
-            }
-            catch (Exception)
-            {
-                this.ShowMessageEvent?.Invoke(this,"AI engine is not working now! Please try again later.");
-                return;
-            }
-
-            var testCase = JsonConvert.DeserializeObject<TestCase>(Result);
-            TestCases.Add(testCase);
-        }
-
         private void Search()
         {
             IsSearching = true;
             if (!Client.IsBusy)
             {
                 var reqparm = new System.Collections.Specialized.NameValueCollection();
-                reqparm.Add("id", TestCaseId);
-                reqparm.Add("document", Document);
-                //Client.DownloadStringAsync(new Uri(ServiceAddress + TestCaseId));
+                if (IsUserStoryId)
+                {
+                    reqparm.Add("id", TestCaseId);
+                }
+                else
+                {
+                    reqparm.Add("document", Document);
+                }
                 Client.UploadValuesAsync(new Uri(ServiceAddress), "POST", reqparm);
             }
         }

@@ -20,7 +20,7 @@
         </Grid.ColumnDefinitions>
 
         <TabControl Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Margin="8">
-            <TabItem Header="User Story ID">
+            <TabItem Header="User Story ID" IsSelected="{Binding IsUserStoryId,Mode=TwoWay}">
                 <TextBox  Text="{Binding TestCaseId,Mode=TwoWay}" Margin="4"></TextBox>
             </TabItem>
             <TabItem Header="User Story Document">
