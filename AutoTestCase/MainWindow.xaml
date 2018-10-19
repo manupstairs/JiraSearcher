@@ -19,8 +19,16 @@
             <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
 
-        <TextBlock Grid.Row="0" Grid.Column="0" Margin="8">User Story ID:</TextBlock>
-        <TextBox Grid.Row="0" Grid.Column="1" Margin="8" Text="{Binding TestCaseId,Mode=TwoWay}"></TextBox>
+        <TabControl Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Margin="8">
+            <TabItem Header="User Story ID">
+                <TextBox  Text="{Binding TestCaseId,Mode=TwoWay}" Margin="4"></TextBox>
+            </TabItem>
+            <TabItem Header="User Story Document">
+                <TextBox  Text="{Binding Document,Mode=TwoWay}" Margin="4"></TextBox>
+            </TabItem>
+        </TabControl>
+        <!--<TextBlock Grid.Row="0" Grid.Column="0" Margin="8">User Story ID:</TextBlock>-->
+        <!--<TextBox Grid.Row="0" Grid.Column="1" Margin="8" Text="{Binding TestCaseId,Mode=TwoWay}"></TextBox>-->
         <Button Grid.Row="0" Grid.Column="2" Width="100" Margin="8" HorizontalAlignment="Left"
                 Command="{Binding SearchCommand,Mode=OneWay}">Generate</Button>
 

@@ -18,10 +18,11 @@ namespace AutoTestCase.ViewModel
 {
     public class MainViewModel : ViewModelBase,IShowWindow,IShowMessage
     {
-        private string testCaseId = "excalibur-3213";
+        
         private WebClient Client { get; set; } = new WebClient();
-        private readonly string ServiceAddress = ConfigurationManager.AppSettings["ServiceAddress"];
+        private readonly string ServiceAddress = ConfigurationManager.AppSettings["ServiceAddress1"];
 
+        private string testCaseId = "excalibur-2330";
         public string TestCaseId
         {
             get { return testCaseId; }
@@ -29,6 +30,14 @@ namespace AutoTestCase.ViewModel
             {
                 Set(ref testCaseId, value);
             }
+        }
+
+        private string document;
+
+        public string Document
+        {
+            get { return document; }
+            set { Set(ref document , value); }
         }
 
         private string result;
@@ -74,6 +83,25 @@ namespace AutoTestCase.ViewModel
         {
             SearchCommand = new RelayCommand(Search);
             Client.DownloadStringCompleted += Client_DownloadStringCompleted;
+            Client.UploadValuesCompleted += Client_UploadValuesCompleted;
+        }
+
+        private void Client_UploadValuesCompleted(object sender, UploadValuesCompletedEventArgs e)
+        {
+            IsSearching = false;
+            TestCases.Clear();
+            try
+            {
+                Result = Encoding.UTF8.GetString(e.Result);
+            }
+            catch (Exception)
+            {
+                this.ShowMessageEvent?.Invoke(this, "AI engine is not working now! Please try again later.");
+                return;
+            }
+
+            var testCase = JsonConvert.DeserializeObject<TestCase>(Result);
+            TestCases.Add(testCase);
         }
 
         private void Client_DownloadStringCompleted(object sender, DownloadStringCompletedEventArgs e)
@@ -98,8 +126,12 @@ namespace AutoTestCase.ViewModel
         {
             IsSearching = true;
             if (!Client.IsBusy)
-            { 
-                Client.DownloadStringAsync(new Uri(ServiceAddress + TestCaseId));
+            {
+                var reqparm = new System.Collections.Specialized.NameValueCollection();
+                reqparm.Add("id", TestCaseId);
+                reqparm.Add("document", Document);
+                //Client.DownloadStringAsync(new Uri(ServiceAddress + TestCaseId));
+                Client.UploadValuesAsync(new Uri(ServiceAddress), "POST", reqparm);
             }
         }
     }
